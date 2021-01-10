@@ -7,6 +7,7 @@ module Accpartman
 
     # Variables
     @filename
+    @dropbox
 
     attr_accessor *PARTITION_NAMES
     attr_accessor :filename
@@ -14,6 +15,7 @@ module Accpartman
     def initialize(options = {})
       if user_data_path = options[:user_data_path]
         @filename = "#{user_data_path}/account.json"
+        @dropbox = options[:dropbox_path] && "#{options[:dropbox_path]}/account.json"
 
         begin
           load_from_file @filename
@@ -45,7 +47,15 @@ module Accpartman
 
     def save!
       File.open(@filename, 'w') do |file|
+        puts "GENERIC SAVE!"
         file.write self.to_json
+      end
+
+      if @dropbox
+        puts "DROPBOX SAVE!!!"
+        File.open(@dropbox, 'w') do |file|
+          file.write self.to_json
+        end
       end
     end
 

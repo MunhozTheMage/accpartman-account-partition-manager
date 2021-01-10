@@ -12,11 +12,18 @@ module AccountPartitioningManager
         FileUtils.mkdir_p(@user_data_path)
       end
 
+      # Dropbox compatibility
+      # Will ONLY use dropbox if there is a accpartman folder inside
+      @dropbox_path = File.expand_path('~/Dropbox/accpartman')
+      unless File.directory?(@dropbox_path)
+        @dropbox_path = nil
+      end
+
       # Show window
       signal_connect :activate do |application|
         window = Accpartman::MainWindow.new(
           application,
-          Accpartman::Account.new(user_data_path: @user_data_path)
+          Accpartman::Account.new(user_data_path: @user_data_path, dropbox_path: @dropbox_path)
         )
         window.present
       end
