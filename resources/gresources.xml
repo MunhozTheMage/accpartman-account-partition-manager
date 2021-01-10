@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/com/munhozthemage/accpartman">
+    <file preprocess="xml-stripblanks">ui/main_window.ui</file>
+    <file preprocess="xml-stripblanks">ui/money_operation_window.ui</file>
+    <file preprocess="xml-stripblanks">ui/money_reallocation_window.ui</file>
+  </gresource>
+</gresources>
